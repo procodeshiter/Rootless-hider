@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Создание Launch Daemon
+cat <<EOF > /Library/LaunchDaemons/com.procoder.jailbreakhider.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.procoder.jailbreakhider</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/jailbreakhider</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+</dict>
+</plist>
+EOF
+
+# Установка прав
+chmod 644 /Library/LaunchDaemons/com.procoder.jailbreakhider.plist
+chown root:wheel /Library/LaunchDaemons/com.procoder.jailbreakhider.plist
+
+# Загрузка демона
+launchctl load /Library/LaunchDaemons/com.procoder.jailbreakhider.plist
